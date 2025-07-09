@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Control Core</title>
+    <link rel="stylesheet" href="controlcore.css">
+    <style>
+        /* Contact Form Section */
+        .contact-form-section {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form-section h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #888;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background-color: #eaeaea;
+        }
+
+        .form-group textarea {
+            resize: none;
+            font-family: Arial, sans-serif;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #fe8914;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #e67e00;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <a href="index.html"><img src="colorful-logo.png" alt="Control Core Logo" class="logo"></a>
+            <div class="nav-right">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </nav>
+                <a href="contact.html" class="contact-button">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-form-section">
+            <h1>Contact Us</h1>
+            <form id="contact-form" action="https://formspree.io/f/mldbbqbe" method="POST">
+                <div class="form-group">
+                    <input type="text" id="first-name" name="First Name" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="last-name" name="Last Name" placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="company-name" name="Company Name" placeholder="Company Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone-number" name="Phone Number" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="Email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="Message" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+            <div id="success-message" class="success-message" style="display: none;">
+                Thank you! Your message has been received.
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Control Core, LLC 2025 | All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            var form = event.target;
+
+            fetch(form.action, {
+                method: form.method,
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    form.reset();
+                    document.getElementById("success-message").style.display = "block";
+                } else {
+                    alert("There was a problem submitting your form. Please try again.");
+                }
+            }).catch(error => {
+                alert("There was a problem submitting your form. Please try again.");
+            });
+        });
+    </script>
+</body>
+</html>
